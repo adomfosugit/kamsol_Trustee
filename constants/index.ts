@@ -1,15 +1,19 @@
 export const sidebarLinks = [
- 
+  
   {
-    imgURL: "/assets/icons/wallpaper.svg",
-    route: "/explore",
-    label: "Explore",
-  },
- 
-  {
-    imgURL: "/assets/icons/gallery-add.svg",
-    route: "/main",
+    imgURL: "/dashboard.svg",
+    route: "/Dashboard",
     label: "Dashboard",
+  },
+  {
+    imgURL: "/portfolio.svg",
+    route: "/Portfolio",
+    label: "Portfolio",
+  },
+  {
+    imgURL: "/transactions.svg",
+    route: "/transaction-history",
+    label: "Transactions",
   },
 ];
 

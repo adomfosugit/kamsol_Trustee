@@ -6,7 +6,7 @@ import Navigator from './Navigator'
 
 const Topbar = () => {
   return (
-    <nav className=' p-3 px-8 flex bg-white justify-between items-center shadow-xl sticky top-0 z-10'>
+    <nav className=' px-8 flex bg-white justify-between items-center shadow-xl sticky top-0 z-10'>
         <div>
             <Logo />
         </div>

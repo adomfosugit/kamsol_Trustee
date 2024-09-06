@@ -8,7 +8,7 @@ import {Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessag
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link';
-import { createAccountRecovery, signInAccount } from '@/Appwrite/api';
+import { createAccountRecovery, signInAccount } from '@/lib/Appwrite/api';
 import { toast } from '@/components/ui/use-toast';
 type Props = {}
 
@@ -38,11 +38,11 @@ const page = (props: Props) => {
     }
   }
   return (
-    <div className='h-[800px] w-full shadow-2xl'>
+    <div className=' w-full shadow-2xl'>
 
-    <div className='bg-white h-[800px] w-full flex flex-col items-center gap-y-[40px]  '>
-      <div className='h-[70px] bg-black w-[200px]'>
-        <Image alt='logo' src= '/icon.jpg' height={70} width={200} />
+    <div className='bg-white  w-full flex flex-col items-center gap-y-[40px]  '>
+      <div className='h-1/4 w-[200px]'>
+        <Image alt='logo' src= '/icon.jpg' height={70} width={150} />
       </div>
       <div className='w-3/4'>
       <Form {...form}>
@@ -67,10 +67,6 @@ const page = (props: Props) => {
     </Form>
       </div>
      
-    
-      <div className='w-3/4 mt-[450px] '><p>By Submiting you agree to our 
-        <Link href= '/' className='text-kolor underline mr-1'> Terms of Service</Link> & <Link href='/' className='text-kolor underline'>Privacy Policy</Link>
-        </p></div>
     </div>
     </div>
   )

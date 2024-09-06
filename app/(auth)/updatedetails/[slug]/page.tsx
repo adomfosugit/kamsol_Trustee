@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage,} from "@/components/ui/form"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { createAccountUpdate, signInAccount } from '@/Appwrite/api';
+import { createAccountUpdate, signInAccount } from '@/lib/Appwrite/api';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'

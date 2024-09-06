@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link';
 import Loader from '@/components/Loader';
-import { signInAccount } from '@/Appwrite/api';
+import { signInAccount } from '@/lib/Appwrite/api';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 type Props = {}
@@ -20,6 +20,7 @@ const formSchema = z.object({
 })
 
 const page = (props: Props) => {
+  
   const router = useRouter()
   const [isLoading, setIsLoading] =  useState<boolean>(false)
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,15 +43,15 @@ const page = (props: Props) => {
     
   }
   return (
-    <div className='h-[800px] w-full shadow-2xl'>
+    <div className=' w-full shadow-2xl'>
 
-    <div className='bg-white h-[800px] w-full flex flex-col items-center gap-y-[40px]  '>
-      <div className='h-[70px] '>
+    <div className='bg-white w-full flex flex-col items-center gap-y-[20px]  '>
+      <div className='h-1/4 '>
         <Image alt='logo' src= '/icon.jpg' height={70} width={200} priority/>
       </div>
       <div className='w-3/4'>
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="Email"
@@ -89,9 +90,7 @@ const page = (props: Props) => {
       <Link href= '/Recover' className='text-primary underline'>Reset</Link>
       </div>
     
-      <div className='w-3/4 mt-[300px] '><p>By Signing up you agree to our 
-        <Link href= '/' className='text-kolor underline mr-1'> Terms of Service</Link> & <Link href='/' className='text-kolor underline'>Privacy Policy</Link>
-        </p></div>
+      
     </div>
     </div>
   )

@@ -17,7 +17,7 @@ const Bento1 = () => {
     <Card className='h-full border-none shadow-none  '>
    
     <CardContent className='items-center w-3/4 mx-auto mt-6 '>
-      <p className='font-extrabold text-[30px] text-pretty md:text-[70px]'>Invest in Your Future with Premier Real Estate Opportunities</p>
+      <p className='font-extrabold text-2xl text-pretty md:text-3xl'>Invest in Your Future with Premier Real Estate Opportunities</p>
       <p className='font-light text-[20px] md:text-[30px] '>Unlock High Returns with Secure and Smart Property Investments</p>
       <Link href='/sign-up'>
                 

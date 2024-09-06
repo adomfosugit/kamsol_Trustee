@@ -10,11 +10,16 @@ import {
   } from "@/components/ui/menubar"
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
+import { getLoggedInUser, LogOutUser } from '@/lib/Appwrite/api'
+import { redirect, useRouter } from 'next/navigation'
   
 
 type Props = {}
 
 const Navigator = (props: Props) => {
+  
+
+
   return (
     <Menubar>
   <MenubarMenu>
@@ -22,11 +27,7 @@ const Navigator = (props: Props) => {
         <Menu  className='text-primary rounded-none'/>
     </MenubarTrigger>
     <MenubarContent className='w-[200px] 2xl:w-[400px] px-3 text-xl'>
-    <Link href='/sign-in' >
-      <MenubarItem>
-      Sign In
-     </MenubarItem>
-     </Link>
+        <Link href='/sign-in' > <MenubarItem> Sign In</MenubarItem> </Link>
     <Link href='/about' >
       <MenubarItem>
       About

@@ -19,9 +19,9 @@ const Sidebar = ( {user} : userdetail ) => {
     
     const pathname = usePathname()
   return (
-    <section className='sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r  border-kolor pt-8 max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px]'>
+    <section className='fixed left-0 top-0 flex h-screen w-fit flex-col justify-between border-r  border-kolor pt-8 max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px]'>
         <nav className='flex flex-col gap-4'>
-            <Link href='/' className='mb-12 cursor-pointer flex items-center gap-2'>
+            <Link href='/' className='mb-3 cursor-pointer flex items-center gap-2'>
             <Logo />
             </Link>
         {sidebarLinks.map((item) => {

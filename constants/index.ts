@@ -16,6 +16,23 @@ export const sidebarLinks = [
     label: "Transactions",
   },
 ];
+export const imageLinks = [
+  
+   {
+    imgURL: "/pexels-godless-humanist-739743-1587947.jpg",
+    id: 1,
+    label: 'first',
+  },
+ 
+   {
+    imgURL: "/pexels-gaion-5668974.jpg",
+    id: 2,
+    label: 'second',
+  },
+ 
+   
+  
+];
 
 export const infocards = [
   {

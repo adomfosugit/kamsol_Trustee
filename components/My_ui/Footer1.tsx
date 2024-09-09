@@ -3,6 +3,7 @@ import React from 'react'
 import { LogOutUser } from '@/lib/Appwrite/api'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { LogOutIcon } from 'lucide-react'
 
 
 
@@ -36,7 +37,7 @@ const Footer1 = ({username, type = 'desktop'}: Footerprops  ) => {
 
         </div>
         <div className='relative size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center' onClick={handlelogout}>
-            <Image src ='logout.svg' fill alt='logout' />
+            <LogOutIcon />
 
         </div>
     </footer>

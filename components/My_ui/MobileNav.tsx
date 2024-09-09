@@ -16,6 +16,7 @@ import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Footer1 from './Footer1'
+import { Menu } from 'lucide-react'
 export type userdetail1 = {
     user1:{
         name:string;
@@ -26,10 +27,10 @@ export type userdetail1 = {
 const MobileNav = ({user1}:userdetail1) => {
     const pathname = usePathname()
   return (
-    <section className='w-full max-w-[264px]'>
+    <section className='w-full max-w-[264px] '>
         <Sheet>
             <SheetTrigger>
-                <Image src='menu.svg' width={30} height={30} alt='menu' className='cursor-pointer' />
+                <Menu  width={30} height={30} className='cursor-pointer' />
             </SheetTrigger>
             <SheetContent side='left' className='border-none bg-white'>
                 <Logo />

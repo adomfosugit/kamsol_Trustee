@@ -1,11 +1,12 @@
 'use server'
 import { NewUser, Update } from "@/Types";
 import { createSessionClient,createAdminClient } from "./Config";
-import {ID} from 'node-appwrite'
+import {ID, Query} from 'node-appwrite'
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { parseStringify } from "@/lib/utils";
-
+// Authentication 
+const {NEXT_DATABASE_ID, NEXT_PROPERTY_COLLECTION_ID} = process.env
 export async function createUserAccount(user:NewUser){ 
   try {
     const {account} = await createAdminClient()
@@ -29,7 +30,12 @@ export async function signInAccount(Email:string,Password:string){
   try {
     const {account} = await createAdminClient()
     const promise = await account.createEmailPasswordSession(Email,Password);
-  
+    cookies().set("appwrite-session", promise.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
     return parseStringify(promise)
   } catch (error) {
     console.log(error)
@@ -48,7 +54,7 @@ export async function createAccountUpdate(ID:string, secret:string, password:str
   try {
     const {account} = await createAdminClient()
     const promise = await account.updateRecovery(ID, secret, password)
-    return promise
+    return parseStringify(promise)
   } catch (error) {
     console.log(error)
   }   
@@ -56,8 +62,8 @@ export async function createAccountUpdate(ID:string, secret:string, password:str
 export async function getLoggedInUser(){ 
   try {
     const {account} = await createSessionClient()
-    
-    return await account.get()
+    const user =  await account.get()
+    return parseStringify(user)
   } catch (error) {
     console.log(error)
   }   
@@ -71,4 +77,49 @@ export async function LogOutUser(){
   } catch (error) {
     console.log(error)
   }   
+}
+// Database 
+export async function getPropertyData(){
+  try {
+    const { database } = await createAdminClient()
+    const propertyData = await database.listDocuments(
+        NEXT_DATABASE_ID!,
+        NEXT_PROPERTY_COLLECTION_ID!,
+        [Query.select(['Name','Price','$id','Images']),Query.limit(8) ]
+      
+    )
+    if(!propertyData) throw new Error
+    return propertyData.documents
+  } catch (error) {
+    
+  }
+}
+// Database 
+export async function getBlogPropertyData(blogid:string){
+  try {
+    const { database } = await createAdminClient()
+    const propertyData = await database.getDocument(
+      NEXT_DATABASE_ID!,
+      NEXT_PROPERTY_COLLECTION_ID!,
+      blogid)
+    return propertyData
+  } catch (error) {
+    
+  }
+}
+// Messaging Email
+export async function sendTermsConditions( content:string , userId:string ){
+  try {
+    const { messages } = await createAdminClient()
+    const termsMessage = await messages.createEmail(
+      ID.unique(),
+      'Investment Plan ',
+      content,
+      [],[userId],[],[],[],[], false,true
+      
+    )
+    return termsMessage
+  } catch (error) {
+    
+  }
 }

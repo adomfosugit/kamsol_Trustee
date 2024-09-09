@@ -38,8 +38,7 @@ const page = (props: Props) => {
     if(!session){
     return toast({title: 'Sign in Failed. Please try again'})
     }
-    
-    router.push('/')
+    router.push('/Dashboard')
     
   }
   return (

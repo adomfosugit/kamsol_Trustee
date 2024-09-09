@@ -18,7 +18,7 @@ export default function Home() {
 
     <About />
    
-<div>
+<div className="container max-w-4xl">
 {infocards.map((list)=> (
       <div  key={list.id} className="h-[700px]" >
          <Portfolios 

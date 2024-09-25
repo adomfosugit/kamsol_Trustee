@@ -13,6 +13,7 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList,} from "@/components/ui/command"
 import { toast } from '@/components/ui/use-toast'
 import { getLoggedInUser, sendTermsConditions } from '@/lib/Appwrite/api'
+import { countriesName, CountryCode } from '@/constants'
 
 type Props = {}
 
@@ -27,6 +28,7 @@ const formSchema = z.object({
   DateofBirth:z.string({required_error:'Name required'}).date(),
   Nationality:z.string({required_error:'Field required'}),
   ResidentialAddress:z.string({required_error:'Field required'}),
+  PhoneCode: z.coerce.number({required_error:'Field required'}).positive(),
   PhoneNumber:z.string().regex(phoneRegex, 'Invalid Number!'),
   Email:z.string({required_error:'Field required'}).email(),
   Occupation:z.string({required_error:'Field required'}),
@@ -51,6 +53,7 @@ const page = (props: Props) => {
         FullName: "",
         DateofBirth: '',
         Nationality:'',
+        PhoneCode: 0,
         PhoneNumber:'',
         Email:'',
         Occupation:'',
@@ -141,15 +144,70 @@ const page = (props: Props) => {
             </FormItem>
           )}
         />
-        <FormField
+     
+          <FormField
           control={form.control}
           name="Nationality"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="flex flex-col">
               <FormLabel>Nationality</FormLabel>
-              <FormControl>
-                <Input placeholder="Nationality" {...field} />
-              </FormControl>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "w-full justify-between",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value
+                        ? countriesName.find(
+                            (nationality) => nationality.country === field.value
+                          )?.country || field.value
+                        : "Select "}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className=" p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search..."
+                      value={inputValue}
+                      onValueChange={(value) => {
+                        setInputValue(value)
+                        form.setValue("InvestmentFund", value)
+                      }}
+                    />
+                    <CommandList>
+                      <CommandGroup>
+                        {countriesName.map((nationality) => (
+                          <CommandItem
+                            value={nationality.country}
+                            key={nationality.country}
+                            onSelect={() => {
+                              form.setValue("Nationality", nationality.country)
+                              setInputValue(nationality.country)
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                nationality.country === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {nationality.country}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
              
               <FormMessage />
             </FormItem>
@@ -164,6 +222,75 @@ const page = (props: Props) => {
               <FormControl>
                 <Input placeholder="Residential Address" {...field}  />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="PhoneCode"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Country Code</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "w-full justify-between",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value
+                        ? CountryCode.find(
+                            (code) => code.calling_code === field.value
+                          )?.calling_code || field.value
+                        : "Select "}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className=" p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search byCountry..."
+                      value={inputValue}
+                      onValueChange={(value) => {
+                        setInputValue(value)
+                        {/* @ts-ignore */}
+                        form.setValue("PhoneCode", value)
+                      }}
+                    />
+                    <CommandList>
+                      <CommandGroup>
+                        {CountryCode.map((nationality) => (
+                          <CommandItem
+                            value={nationality.country}
+                            key={nationality.country}
+                            onSelect={() => {
+                              form.setValue("PhoneCode", nationality.calling_code)
+                              setInputValue(JSON.stringify(nationality.calling_code))
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                nationality.calling_code === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {nationality.calling_code} {''}{nationality.country}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+             
               <FormMessage />
             </FormItem>
           )}

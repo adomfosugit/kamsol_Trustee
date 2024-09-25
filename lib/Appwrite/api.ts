@@ -85,7 +85,7 @@ export async function getPropertyData(){
     const propertyData = await database.listDocuments(
         NEXT_DATABASE_ID!,
         NEXT_PROPERTY_COLLECTION_ID!,
-        [Query.select(['Name','Price','$id','Images']),Query.limit(8) ]
+        [Query.select(['Name','Price','$id','Images']),Query.limit(1)]
       
     )
     if(!propertyData) throw new Error

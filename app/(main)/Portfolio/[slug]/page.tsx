@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { getBlogPropertyData } from '@/lib/Appwrite/api'
+import { CheckCheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -60,12 +61,22 @@ const page = async ({params}: { params: { slug: string } }) => {
             </div>
         </div>
         <div className='container max-w-4xl flex-col mt-4 h-60 md:h-48 border-2 '>
-            <p className='font-bold'>Progress Update</p>
+            <p className='font-bold text-center'>Progress Update</p>
             <p className='text-justify text-[12px] md:text-sm'>{blogData?.Progress_update}</p>
         </div>
         <div className='container max-w-4xl flex-col mt-4 h-60 md:h-48 border-2 mb-1 md:mb-8 '>
-            <p className='font-bold'>Description</p>
+            <p className='font-bold text-center'>Description</p>
             <p className='text-justify text-[12px] md:text-sm'>{blogData?.Description}</p>
+            {/*utility*/}
+            
+            <p className='font-bold mt-2 text-center'>Available Utilities</p>
+            <div className='flex flex-col text-center justify-between'>
+
+            <p className='text-center text-[12px] md:text-sm'>{blogData?.Electricity ? <h1>Electricty</h1> : <h1>Electricity Unavailable</h1>}</p>
+            <p className='text-center text-[12px] md:text-sm'>{blogData?.Water ? <h1>Water</h1> : <h1>Water Supply unavailable</h1>}</p>
+            <p className='text-center text-[12px] md:text-sm'>{blogData?.Internet ? <h1>Internet</h1> : <h1>Internet Connection unavailable</h1>}</p>
+            </div>
+    
         </div>
         <div className='flex flex-col md:flex-row max-w-4xl container  '>
         <Card className='container  mt-4  p-2 w-3/4'>

@@ -68,9 +68,11 @@ export default async function RootLayout({
                 <MobileNav user1={user}/> 
                 </div>
               </div>
-              
+              <div className="pt-24 md:pt-2">
+                
               <Toaster />
                 {children}
+              </div>
               
               </section>
             </div>
